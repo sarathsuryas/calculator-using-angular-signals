@@ -1,0 +1,49 @@
+<section class="calculator">
+  <header class="calculator__header">
+    <h1 class="calculator__title">Calculator</h1>
+    <button
+      type="button"
+      class="calculator__clear-history"
+      aria-label="Clear history"
+      [disabled]="!hasHistory()"
+      (click)="clearHistory()"
+    >
+      Clear history
+    </button>
+  </header>
+
+  <div class="display" role="status" aria-live="polite" [attr.aria-label]="'Result ' + display()">
+    <output class="display__value" data-testid="display">{{ display() }}</output>
+  </div>
+
+  <div class="keypad">
+    @for (key of keys; track key.label) {
+      <button
+        type="button"
+        [class]="key.classes"
+        [attr.aria-label]="key.ariaLabel"
+        (click)="onKeyPress(key.action)"
+      >
+        {{ key.label }}
+      </button>
+    }
+  </div>
+
+  <p class="hint">Keyboard: digits, <kbd>+</kbd> <kbd>-</kbd> <kbd>*</kbd> <kbd>/</kbd>, <kbd>Enter</kbd> equals, <kbd>Esc</kbd> clear</p>
+
+  <aside class="history" aria-label="Calculation history">
+    <h2 class="history__title">History</h2>
+    @if (hasHistory()) {
+      <ol class="history__list" data-testid="history">
+        @for (entry of history(); track $index) {
+          <li class="history__item">
+            <span class="history__expression">{{ entry.expression }}</span>
+            <span class="history__result">{{ entry.result }}</span>
+          </li>
+        }
+      </ol>
+    } @else {
+      <p class="history__empty">No calculations yet</p>
+    }
+  </aside>
+</section>

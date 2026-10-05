@@ -1,0 +1,201 @@
+:host {
+  display: block;
+}
+
+.calculator {
+  --key-bg: oklch(100% 0 0);
+  --key-border: oklch(90% 0.005 260);
+  --key-hover: oklch(96% 0.004 260);
+  --operator-bg: oklch(93% 0.02 265);
+  --operator-hover: oklch(88% 0.04 265);
+  --equals-bg: oklch(55% 0.22 275);
+  --equals-text: oklch(98% 0 0);
+  --text: oklch(24% 0.02 270);
+  --muted: oklch(58% 0.02 270);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: min(22rem, 100%);
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  background: oklch(97% 0.004 270);
+  box-shadow: 0 1.25rem 2.5rem oklch(30% 0.05 270 / 0.12);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.calculator__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.calculator__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.calculator__clear-history {
+  border: 0;
+  background: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.calculator__clear-history:hover:not(:disabled) {
+  background: oklch(92% 0.01 270);
+  color: var(--text);
+}
+
+.calculator__clear-history:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.display {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  min-height: 3.5rem;
+  padding: 0.75rem 0.875rem;
+  border-radius: 0.75rem;
+  background: oklch(22% 0.02 270);
+  overflow: hidden;
+}
+
+.display__value {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: oklch(97% 0 0);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.key {
+  min-height: 3.25rem;
+  border: 1px solid var(--key-border);
+  border-radius: 0.75rem;
+  background: var(--key-bg);
+  color: inherit;
+  font: inherit;
+  font-size: 1.125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.key:hover {
+  background: var(--key-hover);
+}
+
+.key:active {
+  transform: translateY(1px);
+}
+
+.key--wide {
+  grid-column: span 2;
+}
+
+.key--operator {
+  background: var(--operator-bg);
+  border-color: transparent;
+  font-size: 1.25rem;
+}
+
+.key--operator:hover {
+  background: var(--operator-hover);
+}
+
+.key--equals {
+  background: var(--equals-bg);
+  color: var(--equals-text);
+}
+
+.key--equals:hover {
+  background: oklch(48% 0.22 275);
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.hint kbd {
+  padding: 0.0625rem 0.25rem;
+  border: 1px solid var(--key-border);
+  border-radius: 0.25rem;
+  background: var(--key-bg);
+  font-family: ui-monospace, "SFMono-Regular", monospace;
+  font-size: 0.6875rem;
+}
+
+.history {
+  border-top: 1px solid var(--key-border);
+  padding-top: 0.75rem;
+}
+
+.history__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.history__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  max-height: 9rem;
+  overflow-y: auto;
+}
+
+.history__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.5rem;
+  background: oklch(100% 0 0);
+  font-size: 0.8125rem;
+}
+
+.history__expression {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.history__result {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.history__empty {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
